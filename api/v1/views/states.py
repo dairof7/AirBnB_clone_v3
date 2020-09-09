@@ -33,12 +33,12 @@ def delete_state(state_id):
     state = storage.get(State, state_id)
     if state is None:
         abort(404)
-    state.delete()
-    state.save()
+    storage.delete(state)
+    storage.save()
     return make_response(jsonify({}), 200)
 
 
-@app_views.route('/states', methods=['POST'], strict_slashes=False)
+@app_views.route('/states', strict_slashes=False, methods=['POST'])
 def create_state():
     """Creates a new state object with POST"""
     jsonRequest = request.get_json()
@@ -47,9 +47,11 @@ def create_state():
     elif 'name' not in jsonRequest:
         return jsonify({'error': 'Missing name'}), 400
     else:
-        obj = State(**jsonRequest)
+        _state = State(**jsonRequest)
+        storage.new(_state)
         storage.save()
-        return jsonify(obj.to_dict()), 201
+        return jsonify(_state.to_dict()), 201
+
 
 @app_views.route('/states/<state_id>', methods=['PUT'],
                  strict_slashes=False)
@@ -59,11 +61,11 @@ def update_state(state_id):
     jsonRequest = request.get_json()
     if not jsonRequest:
         return jsonify({'error': 'Not a JSON'}), 400
-    if state:
+    if state_id:
         for key, value in jsonRequest.items():
             if (key not in ['id', 'created_at', 'updated_at']):
                 setattr(obj, key, value)
         storage.save()
-        return jsonify(state_id.to_dict())
+        return jsonify(obj.to_dict())
     else:
         abort(404)
