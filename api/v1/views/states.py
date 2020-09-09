@@ -61,7 +61,7 @@ def update_state(state_id):
     jsonRequest = request.get_json()
     if not jsonRequest:
         return jsonify({'error': 'Not a JSON'}), 400
-    if state_id:
+    if obj:
         for key, value in jsonRequest.items():
             setattr(obj, key, value)
         storage.save()
