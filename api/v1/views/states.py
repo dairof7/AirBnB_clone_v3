@@ -65,6 +65,6 @@ def update_state(state_id):
         for key, value in jsonRequest.items():
             setattr(obj, key, value)
         storage.save()
-        return make_response(jsonify(obj.to_dict(), 200))
+        return jsonify(obj.to_dict()), 200
     else:
         abort(404)
