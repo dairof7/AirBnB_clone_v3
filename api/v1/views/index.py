@@ -10,6 +10,7 @@ from models.review import Review
 from models.user import User
 from models.place import Place
 
+
 @app_views.route('/status')
 def status():
     """
@@ -18,6 +19,7 @@ def status():
         json: status
     """
     return jsonify({"status": "OK"})
+
 
 @app_views.route('/stats')
 def show_stats():

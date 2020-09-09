@@ -13,6 +13,7 @@ from models.amenity import Amenity
 app = Flask(__name__)
 app.register_blueprint(app_views)
 
+
 @app.teardown_appcontext
 def close_session(self):
     storage.close()
