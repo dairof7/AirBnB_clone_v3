@@ -16,11 +16,13 @@ app.register_blueprint(app_views)
 
 @app.teardown_appcontext
 def close_session(self):
+    """Closes current session"""
     storage.close()
 
 
 @app.errorhandler(404)
 def page_not_found(e):
+    """method for a page not found (404)"""
     return make_response(jsonify({'error': 'Not found'}), 404)
 
 
