@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" Module to retrives an object """
+""" Module to retrive an object """
 from api.v1.views import app_views
 from flask import jsonify
 from models import storage
