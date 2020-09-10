@@ -310,7 +310,7 @@ No known bugs at this time.
 
 ## Authors
 
-Dairo Facundo Duarte - [Github](https://github.com/dairo7) / [Twitter](https://twitter.com/dFacundo2)
+Dairo Facundo Duarte - [Github](https://github.com/dairof7) / [Twitter](https://twitter.com/dFacundo2)
 
 Bryan Ortiz Lenis - [Github](https://github.com/bryano13) / [Twitter](https://twitter.com/Bryano_13)
 
