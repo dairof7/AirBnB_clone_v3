@@ -55,20 +55,15 @@ def post_place(city_id):
     jsonRequest = request.get_json()
     if not jsonRequest:
         return jsonify({'error': 'Not a JSON'}), 400
-    if 'name' not in jsonRequest:
-        return jsonify({'error': 'Missing name'}), 400
     if 'user_id' not in jsonRequest:
         return jsonify({'error': 'Missing user_id'}), 400
-    else:
-        user_id = jsonRequest['user_id']
-        user = storage.get(User, user_id)
-        if user is None:
-            abort(404)
-
-    obj = Place(**jsonRequest)
-    setattr(obj, "city_id", city_id)
-    storage.new(obj)
-    storage.save()
+    user = storage.get(User, body['user_id'])
+    if user is None:
+        abort(404)
+    if 'name' not in jsonRequest:
+        return jsonify({'error': 'Missing name'}), 400
+    place = Place(city_id=city_id, **jsonRequest)
+    place.save()
     return jsonify(obj.to_dict()), 201
 
 
