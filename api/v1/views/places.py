@@ -41,7 +41,7 @@ def delete_place(place_id):
         abort(404)
     storage.delete(place)
     storage.save()
-    return (jsonify({}))
+    return (jsonify({})), 200
 
 
 @app_views.route("/cities/<city_id>/places", methods=["POST"],
@@ -84,4 +84,4 @@ def put_place(place_id):
     for attr, val in request.get_json().items():
         setattr(place, attr, val)
     place.save()
-    return jsonify(place.to_dict())
+    return jsonify(place.to_dict()), 200
