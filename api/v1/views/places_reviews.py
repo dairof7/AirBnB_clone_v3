@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""cities.py"""
+"""places_reviews module"""
 
 from api.v1.views import app_views
 from flask import abort, jsonify, make_response, request
@@ -48,7 +48,6 @@ def delete_review(review_id):
                  strict_slashes=False)
 def post_review(place_id):
     """Create a Review"""
-
     place = storage.get(Place, place_id)
     if place is None:
         abort(404)
@@ -71,7 +70,7 @@ def post_review(place_id):
 @app_views.route('/reviews/<review_id>', methods=['PUT'],
                  strict_slashes=False)
 def put_review(review_id):
-    """update a place"""
+    """update a place object based on review_id"""
     jsonRequest = request.get_json()
     review = storage.get(Review, review_id)
     if review is None:
