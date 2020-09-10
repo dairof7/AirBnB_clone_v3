@@ -29,6 +29,8 @@ def get_user(user_id):
 def delete(user_id):
     """deletes a single user object based on its user id"""
     user = storage.get(User, user_id)
+    if user is None:
+        abort(404)
     user.delete()
     storage.save()
     return jsonify({})
