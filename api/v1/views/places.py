@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""cities.py"""
+"""places.py module"""
 
 from api.v1.views import app_views
 from flask import abort, jsonify, make_response, request
@@ -48,7 +48,6 @@ def delete_place(place_id):
                  strict_slashes=False)
 def post_place(city_id):
     """Create a Place"""
-
     city = storage.get(City, city_id)
     if city is None:
         abort(404)
@@ -75,7 +74,7 @@ def post_place(city_id):
 @app_views.route('/places/<place_id>', methods=['PUT'],
                  strict_slashes=False)
 def put_place(place_id):
-    """update a place"""
+    """update a place with PUT method"""
     place = storage.get(Place, place_id)
     if place is None:
         abort(404)
